@@ -5,5 +5,4 @@
 ### University of Gdańsk
 
 ### Front-end 2017/2018
-
-### js, node,js RxJs, angular, webpack
+### Js, Node.js, RxJs, angular, Webpack
