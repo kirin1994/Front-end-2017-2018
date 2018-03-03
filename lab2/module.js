@@ -48,7 +48,8 @@ MechanicModule = (function () {
         specialization: 'Cars',
 
         GetOrder(car, client) {
-            
+            car();
+            client();//SAWP THIS ON PREV VERS
         },
 
         GetInformationAboutMechanic() {
