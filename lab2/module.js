@@ -1,20 +1,63 @@
-var module = {}
+var MechanicModule = {}
+var CarModule = {}
 
-module = (function(){
-    var MechanicInterface = {
-        name : 'Adrian',
-        specialization : 'Cars',
-        
-        GetOrder(car){
-            Console.log('Order recived, brand:' + car.brand + ', model:' + car.model + ', production year:' + car.productionYear)
+CarModule = (function () {
+
+    var CarInterface = {
+        brand: 'BMW',
+        model: 'E90',
+        productionYear: '2011',
+
+        GetCarInformations()
+        {
+            console.log('Car: ' + 
+            '\n brand: ' + this.brand +
+            '\n model: ' + this.model +
+            '\n production year: ' + this.productionYear)
         }
     }
+
+    return CarInterface;
 }());
 
-var car = {
-    brand :'BMW',
-    model : 'E90',
-    productionYear : '2011'
-}
 
-module.MechanicInterface.GetOrder(car);
+ClientModule = (function () {
+
+    var ClientInterface = {
+        name: 'Jan',
+        surname: 'Kowalski',
+        city: 'Gdańsk',
+        street: 'Naprawcza',
+
+        GetClientInformations : function()
+        {
+            console.log('Client: ' +
+            '\n name: ' + this.name +
+            '\n surname: ' + this.surname + 
+            '\n city: ' + this.city)
+        }
+    }
+
+    return ClientInterface;
+}());
+
+MechanicModule = (function () {
+
+    var MechanicInterface = {
+        name: 'Adrian',
+        specialization: 'Cars',
+
+        GetOrder(car, client) {
+            
+        },
+
+        GetInformationAboutMechanic() {
+            console.log('Name: ' + this.name + ', Specialization: ' + this.specialization)
+        }
+    }
+
+    return MechanicInterface;
+}());
+
+MechanicModule.GetOrder(CarModule.GetCarInformations, ClientModule.GetClientInformations);
+MechanicModule.GetInformationAboutMechanic();
