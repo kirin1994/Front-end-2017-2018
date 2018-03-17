@@ -1,10 +1,10 @@
-var MechanicModule = {};
-var CarModule = {};
-var ClientModule = {};
+var mechanicModule = {};
+var carModule = {};
+var clientModule = {};
 
-CarModule = (function () {
-
-    var CarInterface = {
+carModule = (function () {
+"use strict";
+    var carInterface = {
         brand: "BMW",
         model: "E90",
         productionYear: "2011",
@@ -28,53 +28,53 @@ CarModule = (function () {
             transmission: {
                 price: "7000",
                 repairPriority : "medium"
-            },
+            }
         },
 
-        GetCarInformations() {
+        getCarInformations() {
             console.log("Car: " +
                 "\n brand: " + this.brand +
                 "\n model: " + this.model +
-                "\n production year: " + this.productionYear)
+                "\n production year: " + this.productionYear);
         }
-    }
+    };
 
-    return CarInterface;
+    return carInterface;
 }());
 
 
-ClientModule = (function () {
-
-    var ClientInterface = {
+clientModule = (function () {
+"use strict";
+    var clientInterface = {
         name: "Jan",
         surname: "Kowalski",
         city: "Gdańsk",
         street: "Naprawcza",
         discount : 10,
 
-        GetClientInformations: function () {
+        getClientInformations: function () {
             console.log("Client: " +
                 "\n name: " + this.name +
                 "\n surname: " + this.surname +
-                "\n city: " + this.city)
+                "\n city: " + this.city);
         }
-    }
+    };
 
-    return ClientInterface;
+    return clientInterface;
 }());
 
-MechanicModule = (function () {
-
-    var MechanicInterface = {
+mechanicModule = (function () {
+"use strict";
+    var mechanicInterface = {
         name: "Adrian",
         specialization: "Cars",
 
-        GetOrder(car, client) {
-            car.GetCarInformations();
-            client.GetClientInformations();
+        getOrder(car, client) {
+            car.getCarInformations();
+            client.getClientInformations();
         },
 
-        Overwiev(car){
+        overwiev(car){
             var highPriorityParts = 0;
             Object.keys(car.parts).forEach(function(part){
                 if(car.parts[part].repairPriority === "high"){
@@ -82,29 +82,29 @@ MechanicModule = (function () {
                 }
             });
 
-            console.log("You need to repair " + highPriorityParts + " parts as fast as possible.")
+            console.log("You need to repair " + highPriorityParts + " parts as fast as possible.");
         },
 
-        CalcDiscount(car, client){
+        calcDiscount(car, client){
             var discount = function(val){
                 var finalPrice = val - val * client.discount/100;
-                console.log("Price after discount " + finalPrice)
-            }
+                console.log("Price after discount " + finalPrice);
+            };
 
             Object.keys(car.parts).map(function(part){
-                discount(car.parts[part]["price"])
-            })
+                discount(car.parts[part].price);
+            });
         },
 
-        GetInformationAboutMechanic() {
-            console.log("Name: " + this.name + ", Specialization: " + this.specialization)
+        getInformationAboutMechanic() {
+            console.log("Name: " + this.name + ", Specialization: " + this.specialization);
         }
-    }
+    };
 
-    return MechanicInterface;
+    return mechanicInterface;
 }());
 
-MechanicModule.GetOrder(CarModule, ClientModule);
-MechanicModule.GetInformationAboutMechanic();
-MechanicModule.CalcDiscount(CarModule, ClientModule);
-MechanicModule.Overwiev(CarModule);
+mechanicModule.getOrder(carModule, clientModule);
+mechanicModule.getInformationAboutMechanic();
+mechanicModule.calcDiscount(carModule, clientModule);
+mechanicModule.overwiev(carModule);
