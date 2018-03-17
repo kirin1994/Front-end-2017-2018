@@ -1,5 +1,6 @@
 var MechanicModule = {}
 var CarModule = {}
+var ClientModule = {}
 
 CarModule = (function () {
 
