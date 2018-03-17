@@ -7,13 +7,34 @@ CarModule = (function () {
         brand: 'BMW',
         model: 'E90',
         productionYear: '2011',
+        parts: {
+            engine: {
+                price: '20000',              
+                repairPriority : 'high'
+            },
+            tires: {
+                price: '3000',
+                repairPriority : 'low'
+            },
+            oil: {
+                price: '300',
+                repairPriority : 'high'
+            },
+            ligths: {
+                price: '1500',
+                repairPriority : 'low'
+            },
+            transmission: {
+                price: '7000',
+                repairPriority : 'medium'
+            },
+        },
 
-        GetCarInformations()
-        {
-            console.log('Car: ' + 
-            '\n brand: ' + this.brand +
-            '\n model: ' + this.model +
-            '\n production year: ' + this.productionYear)
+        GetCarInformations() {
+            console.log('Car: ' +
+                '\n brand: ' + this.brand +
+                '\n model: ' + this.model +
+                '\n production year: ' + this.productionYear)
         }
     }
 
@@ -28,13 +49,13 @@ ClientModule = (function () {
         surname: 'Kowalski',
         city: 'Gdańsk',
         street: 'Naprawcza',
+        discount : 10,
 
-        GetClientInformations : function()
-        {
+        GetClientInformations: function () {
             console.log('Client: ' +
-            '\n name: ' + this.name +
-            '\n surname: ' + this.surname + 
-            '\n city: ' + this.city)
+                '\n name: ' + this.name +
+                '\n surname: ' + this.surname +
+                '\n city: ' + this.city)
         }
     }
 
@@ -48,8 +69,30 @@ MechanicModule = (function () {
         specialization: 'Cars',
 
         GetOrder(car, client) {
-            car();
-            client();//SAWP THIS ON PREV VERS
+            car.GetCarInformations();
+            client.GetClientInformations();
+        },
+
+        Overwiev(car){
+            var highPriorityParts = 0;
+            Object.keys(car.parts).forEach(function(part){
+                if(car.parts[part].repairPriority === 'high'){
+                    highPriorityParts += 1;
+                }
+            });
+
+            console.log('You need to repair ' + highPriorityParts + ' parts as fast as possible.')
+        },
+
+        CalcDiscount(car, client){
+            var discount = function(val){
+                console.log(val)
+            }
+
+            Object.keys(car.parts).map(function(part){
+                console.log(car.parts[part])
+                Object.keys(car.parts[part]).map(discount)
+            })
         },
 
         GetInformationAboutMechanic() {
@@ -60,5 +103,7 @@ MechanicModule = (function () {
     return MechanicInterface;
 }());
 
-MechanicModule.GetOrder(CarModule.GetCarInformations, ClientModule.GetClientInformations);
+MechanicModule.GetOrder(CarModule, ClientModule);
 MechanicModule.GetInformationAboutMechanic();
+MechanicModule.CalcDiscount(CarModule, ClientModule);
+MechanicModule.Overwiev(CarModule);
