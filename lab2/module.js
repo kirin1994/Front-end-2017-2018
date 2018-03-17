@@ -86,12 +86,12 @@ MechanicModule = (function () {
 
         CalcDiscount(car, client){
             var discount = function(val){
-                console.log(val)
+                var finalPrice = val - val * client.discount/100;
+                console.log('Price after discount ' + finalPrice)
             }
 
             Object.keys(car.parts).map(function(part){
-                console.log(car.parts[part])
-                Object.keys(car.parts[part]).map(discount)
+                discount(car.parts[part]['price'])
             })
         },
 
