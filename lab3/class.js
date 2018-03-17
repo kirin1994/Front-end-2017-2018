@@ -18,5 +18,6 @@ Engine.prototype.chipTuning = function(hpImprove, nMImprove){
 
 function DieselEngine(hp, nM, fuel){
     Engine.chipTuning
-    //To DO 
+    //To DO
+     
 };
