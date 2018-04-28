@@ -14,8 +14,6 @@ function drawPlayer(player) {
     context.closePath();
 }
 
-/* Ticker */
-
 const TICKER_INTERVAL = 100;
 
 const ticker$ = Rx.Observable
@@ -30,11 +28,6 @@ const ticker$ = Rx.Observable
             deltaTime: (current.time - previous.time) / 1000
         })
     );
-
-const MOVE_KEYS = {
-    left: 37,
-    right: 39
-};
 
 const input$ = Rx.Observable
     .merge(
@@ -56,13 +49,15 @@ const input$ = Rx.Observable
     )
     .distinctUntilChanged();
 
-const INITIAL_OBJECTS = {
+const OBJECTS = {
     computer: {
         color: "red",
         position: {
             x: canvas.width / 2,
             y: canvas.height / 2
         },
+        width: PLAYER_SIZE,
+        height: PLAYER_SIZE
     },
 
     player: {
@@ -71,6 +66,8 @@ const INITIAL_OBJECTS = {
             x: canvas.width / 4,
             y: canvas.height / 4
         },
+        width: PLAYER_SIZE,
+        height: PLAYER_SIZE
     },
 };
 
@@ -100,8 +97,16 @@ function moveObj(object, move) {
     }
 }
 
-drawPlayer(INITIAL_OBJECTS.computer);
-drawPlayer(INITIAL_OBJECTS.player);
+function gameOver()
+{
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.font = "30px Arial"
+    context.fillText("WYGRAŁEŚ",canvas.height/2,canvas.width/2)
+    game.dispose();
+}
+
+drawPlayer(OBJECTS.computer);
+drawPlayer(OBJECTS.player);
 
 const objects$ = ticker$
     .withLatestFrom(input$)
@@ -111,21 +116,24 @@ const objects$ = ticker$
         moveObj(computer, move);
         moveObj(player, keyInput)
 
-        if(collision)
+        if(collision(computer,player))
+        {
+            gameOver();
+        }
 
         return {
             computer: computer,
             player: player
         };
 
-    }, INITIAL_OBJECTS);
+    }, OBJECTS);
 
 
 function collision(player, computer) {
-    return computer.position.x > player.x - player.width / 2
-        && computer.position.x < player.x + player.width / 2
-        && computer.position.y > player.y - player.height / 2
-        && computer.position.y < player.y + player.height / 2;
+    return computer.position.x + PLAYER_SIZE > player.position.x
+        && computer.position.y + PLAYER_SIZE > player.position.y
+        && player.position.x + PLAYER_SIZE > player.position.x 
+        && player.position.y + PLAYER_SIZE > player.position.y;
 }
 
 function update([ticker, objects]) {
