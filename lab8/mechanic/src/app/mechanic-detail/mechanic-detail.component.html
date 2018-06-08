@@ -1,0 +1,23 @@
+<div class="container" style="margin-top:30px">
+  <div *ngIf="mechanic">
+        <div class="row">
+            <div class="col list-group-item"> Imię </div>
+          <div class="col list-group-item">{{mechanic.name}} </div>
+        </div>
+       <div class="row">
+          <div class="col list-group-item"> Wiek</div>
+         <div class="col list-group-item">{{mechanic.age}} </div>
+        </div>
+       <div class="row">
+          <div class="col list-group-item"> Specjalizacja w marce samochodów </div>
+         <div class="col list-group-item">{{mechanic.carSpecialization}} </div>
+        </div>
+       <div class="row">
+          <div class="col list-group-item"> Cena za godzinę pracy </div>
+         <div class="col list-group-item"> {{mechanic.salaryPerHour}} </div>
+        </div>
+        <div class="row" style="float:right">
+           <button class="btn btn-primary" routerLink="/mechanics">Wróc do listy</button>
+        </div>
+  </div>
+</div>

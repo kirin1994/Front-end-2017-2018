@@ -1,0 +1,23 @@
+<form>
+<div class="container" style="margin-top:30px">
+          <div class="row">
+              <div class="col list-group-item form-control"> Imię </div>
+            <div class="col list-group-item form-control"> <input type="text" [(ngModel)]="mechanic.name" name="name" class="form-control"> </div>
+          </div>
+         <div class="row">
+            <div class="col list-group-item form-control"> Wiek</div>
+           <div class="col list-group-item form-control"><input type="text" [(ngModel)]="mechanic.age" name="age" class="form-control"> </div>
+          </div>
+         <div class="row">
+            <div class="col list-group-item form-control"> Specjalizacja w marce samochodów </div>
+           <div class="col list-group-item form-control"><input type="text" [(ngModel)]="mechanic.carSpecialization" name="carSpecialization" class="form-control"> </div>
+          </div>
+         <div class="row">
+            <div class="col list-group-item form-control"> Cena za godzinę pracy </div>
+           <div class="col list-group-item form-control"> <input type="text" [(ngModel)]="mechanic.salaryPerHour" name="salaryPerHour" class="form-control"> </div>
+          </div>
+          <div class="row" style="float:right;margin-top: 10px">
+             <button class="btn btn-primary" (click)="AddMechanic()">Dodaj</button>
+          </div>
+  </div>
+</form>
